@@ -1,151 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Post</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
-    />
-    <!-- FontAwesome Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: "Roboto", Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        /* align-items: center; */
-        min-height: 100vh;
-        background: linear-gradient(135deg, #dde2ff, #fcddff);
-        padding: 10px;
-      }
-      .blog-container {
-        width: 100%;
-        max-width: 1240px;
-        /* padding: 2rem; */
-        background: rgba(255, 255, 255, 0.95);
-        /* border-radius: 20px; */
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        color: #333;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        overflow: hidden;
-      }
-      .blog-container h1 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #4a47a3;
-        background-color: #fcddff;
-        padding: 10px;
-      }
-      .blog-container h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        color: #4a47a3;
-        text-decoration: underline;
-      }
-      .blog-container p {
-        font-size: 1rem;
-        margin: 10px 0;
-        text-align: left;
-        line-height: 1.8rem;
-      }
-      .blog-container .notice {
-        background: #f0f8ff;
-        border-left: 4px solid #4a47a3;
-        padding: 10px;
-        margin: 10px 0;
-        font-weight: bold;
-        text-align: left;
-        width: fit-content;
-      }
-      .blog-container code {
-        background-color: #fcddff;
-        padding: 5px;
-        line-height: 1.8;
-        border-radius: 5px;
-      }
-      .blog-container pre {
-        text-align: left !important;
-        width: 100% !important;
-        max-width: 500px !important;
-        overflow-x: auto;
-        overflow-y: hidden;
-      }
-      .highlight {
-        background-color: #fcddff;
-        border-radius: 5px;
-        padding: 5px;
-      }
-      .content {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        flex: 1;
-        padding: 0 1.5rem;
-        overflow: hidden;
-      }
-      #date {
-        background-color: #112;
-        color: #f0f8ff;
-        padding: 10px;
-        margin: 0;
-      }
-      #date > small {
-        font-size: 1rem;
-      }
-      #go-home {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        border: none;
-        background-color: #4a47a3;
-        color: #dde2ff;
-        padding: 20px;
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="blog-container" id="blogPost">
-      <button id="go-home">Go Home</button>
-        <span class="fa-solid fa-home"></span> Go to Home
-      </button>
-      <h1>{{title}}</h1>
-      <h2>{{subtitle}}</h2>
-      <div class="content">{{text}}</div>
-      <p id="date"><small>Published on: {{date}}</small></p>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script>
-      document.getElementById("go-home").addEventListener("click", async () => {
-        console.log(`Previous location: ${window.location.href}`);
-        document.getElementById("go-back").addEventListener("click", () => {
-          window.history.back();
-        });
-      });
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Roboto", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      min-height: 100vh;
+      background: linear-gradient(135deg, #dde2ff, #fcddff);
+      padding: 10px;
+    }
+
+    .blog-container {
+      width: 100%;
+      max-width: 1240px;
+      /* padding: 2rem; */
+      background: rgba(255, 255, 255, 0.95);
+      /* border-radius: 20px; */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      color: #333;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .blog-container h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #4a47a3;
+      background-color: #fcddff;
+      padding: 10px;
+    }
+
+    .blog-container h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #4a47a3;
+      text-decoration: underline;
+    }
+
+    .blog-container p {
+      font-size: 1rem;
+      margin: 10px 0;
+      text-align: left;
+      line-height: 1.8rem;
+    }
+
+    .blog-container .notice {
+      background: #f0f8ff;
+      border-left: 4px solid #4a47a3;
+      padding: 10px;
+      margin: 10px 0;
+      font-weight: bold;
+      text-align: left;
+      width: fit-content;
+    }
+
+    .blog-container code {
+      background-color: #fcddff;
+      padding: 5px;
+      line-height: 1.8;
+      border-radius: 5px;
+    }
+
+    .blog-container pre {
+      text-align: left !important;
+      width: 100% !important;
+      max-width: 500px !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .highlight {
+      background-color: #fcddff;
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+      padding: 0 1.5rem;
+      overflow: hidden;
+    }
+
+    #date {
+      background-color: #112;
+      color: #f0f8ff;
+      padding: 10px;
+      margin: 0;
+    }
+
+    #date>small {
+      font-size: 1rem;
+    }
+
+    #go-home {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      background-color: #4a47a3;
+      color: #dde2ff;
+      padding: 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="blog-container" id="blogPost">
+    <button id="go-home">Go Home</button>
+    <span class="fa-solid fa-home"></span> Go to Home
+    </button>
+    <h1>{{title}}</h1>
+    <h2>{{subtitle}}</h2>
+    <div class="content">{{text}}</div>
+    <p id="date"><small>Published on: {{date}}</small></p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script>
+    document.getElementById("go-home").addEventListener("click", () => {
+      window.location.href = "https://blog-frontend-9cvq.onrender.com/";  // Correct URL
+    });
+  </script>
+</body>
+
 </html>
