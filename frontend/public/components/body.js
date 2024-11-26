@@ -58,28 +58,9 @@ function body() {
 
   authorName.style.color = "#A58EA7";
 
-  async function sendId(id) {
-    try {
-      const response = await fetch("/send-id", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-
-      const data = await response.json();
-      console.log("Sent Id:", data);
-    } catch (error) {
-      console.error("Failed to send Id:", error);
-    }
-  }
-
   async function fetchData() {
     try {
-      const response = await fetch("/blogs");
+      const response = await fetch("https://blog-5edj.onrender.com/blogs");
       const data = await response.json();
       console.log(data);
 
@@ -114,7 +95,7 @@ function body() {
 
         wrapper.addEventListener("click", (event) => {
           const blogId = event.currentTarget.parentNode.getAttribute("data-id");
-          window.location.href = `/blog/${blogId}`; // Redirect to /blog/:id
+          window.location.href = `https://blog-5edj.onrender.com/blog/${blogId}`; // Redirect to /blog/:id
         });
 
         setStyle(
