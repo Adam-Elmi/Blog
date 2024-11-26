@@ -12,7 +12,6 @@ dotenv.config();
 
 const app = express();
 
-
 app.use(cors());
 const port = process.env.PORT || 3000;
 const uri = process.env.URI;
@@ -34,7 +33,7 @@ const fileName = fileURLToPath(import.meta.url);
 const dirname = path.dirname(fileName);
 const inputFile = path.join(dirname, "..", "frontend", "public", "input.html");
 const blogFile = path.join(dirname, "..", "frontend", "public", "blog.html");
-console.log(inputFile, blogFile)
+console.log(inputFile, blogFile);
 app.use(express.json());
 app.use(express.static(path.join(dirname, "frontend", "public")));
 
@@ -85,11 +84,17 @@ app.get("/blog/:id", async (req, res) => {
       return res.status(404).json({ error: "Blog not found" });
     }
 
-    const htmlTemplate = fs.readFileSync(path.join(dirname, "..", "frontend", "public", 'blog.html'), 'utf-8');
+    const htmlTemplate = fs.readFileSync(
+      path.join(dirname, "..", "frontend", "public", "blog.html"),
+      "utf-8"
+    );
 
     function processCustomFeatures(text) {
       text = text.replace(/\/(.*?)\//g, '<span class="highlight">$1</span>');
-      text = text.replace(/\[note\](.*?)\[\/note\]/g, '<div class="notice">$1</div>');
+      text = text.replace(
+        /\[note\](.*?)\[\/note\]/g,
+        '<div class="notice">$1</div>'
+      );
       return text;
     }
 
@@ -99,8 +104,8 @@ app.get("/blog/:id", async (req, res) => {
       .replaceAll("{{title}}", data.title)
       .replace("{{subtitle}}", data.subtitle)
       .replace("{{text}}", formattedText)
-      .replace("{{date}}", data.date);
-      
+      .replace("{{date}}", data.date)
+      .replace("{{frontendURL}}", "https://blog-frontend-9cvq.onrender.com/");
 
     res.send(htmlContent);
   } catch (error) {
@@ -108,7 +113,6 @@ app.get("/blog/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 
 app.listen(port, () => {
   console.log("Server is running at http://localhost:3000");
