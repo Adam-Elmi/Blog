@@ -34,13 +34,12 @@ connectToDB();
 
 const fileName = fileURLToPath(import.meta.url);
 const dirname = path.dirname(fileName);
-const inputFile = path.join(dirname, "frontend", "public", "input.html");
-const blogFile = path.join(dirname, "frontend", "public", "blog.html");
+const inputFile = path.join(dirname, "..", "frontend", "public", "input.html");
+const blogFile = path.join(dirname, "..", "frontend", "public", "blog.html");
+console.log(inputFile, blogFile)
+app.use(express.json());
+app.use(express.static(path.join(dirname, "frontend", "public")));
 
-app.use(express.json()); // To parse JSON request bodies
-app.use(express.static("frontend/public"));
-
-// Initialize markdown-it with the Prism plugin
 const md = new MarkdownIt({ html: true, linkify: true }).use(markdownItPrism);
 
 function getCurrentDate() {
@@ -48,8 +47,8 @@ function getCurrentDate() {
   return today.toLocaleDateString("en-GB");
 }
 
-app.get("/input-field", (request, response) => {
-  response.sendFile(inputFile);
+app.get("/input-field", (req, res) => {
+  res.sendFile(inputFile);
 });
 
 app.post("/publish", async (req, res) => {
@@ -87,7 +86,7 @@ app.get("/blog/:id", async (req, res) => {
       return res.status(404).json({ error: "Blog not found" });
     }
 
-    const htmlTemplate = fs.readFileSync(path.join(dirname, 'public', 'blog.html'), 'utf-8');
+    const htmlTemplate = fs.readFileSync(path.join(dirname, 'frontend', 'public', 'blog.html'), 'utf-8');
 
     function processCustomFeatures(text) {
       text = text.replace(/\/(.*?)\//g, '<span class="highlight">$1</span>');
@@ -110,7 +109,7 @@ app.get("/blog/:id", async (req, res) => {
   }
 });
 
-const port = process.env.PORT;
-app.listen(port || 8000, () => {
-  console.log("Server is running at http://localhost:3000");
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+  console.log("Server is running at http://localhost:8000");
 });
