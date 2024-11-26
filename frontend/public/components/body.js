@@ -18,8 +18,8 @@ function body() {
   quote_Section.append(quoteText, authorName);
 
   // Values
-  quoteText.textContent = "Programming is the art of problem-solving.";
-  authorName.textContent = "— Unknown";
+  quoteText.textContent = "True warriors don’t seek war.";
+  authorName.textContent = "— Vinland Saga";
 
   // Styles
   setStyle(
