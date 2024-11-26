@@ -2,6 +2,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { MongoClient, ObjectId } from "mongodb";
 import fs from "fs";
 import MarkdownIt from "markdown-it";
@@ -10,6 +11,9 @@ import markdownItPrism from "markdown-it-prism";
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
+
 const uri = process.env.URI;
 const client = new MongoClient(uri);
 const db = client.db("My-blog");
