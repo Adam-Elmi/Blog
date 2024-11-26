@@ -12,10 +12,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: "https://blog-frontend-9cvq.onrender.com",
-  methods: "GET,POST",
-}));
+app.use(cors());
 
 const uri = process.env.URI;
 const client = new MongoClient(uri);
@@ -53,6 +50,7 @@ app.get("/input-field", (req, res) => {
 
 app.post("/publish", async (req, res) => {
   try {
+    console.log("POST request received");
     const data = req.body;
     data.date = getCurrentDate();
     const { title, subtitle, text, date } = data;
