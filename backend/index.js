@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "*",
+  origin: "https://blog-frontend-9cvq.onrender.com",
   methods: "GET,POST",
 }));
 
