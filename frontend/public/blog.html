@@ -130,7 +130,7 @@
   </head>
   <body>
     <div class="blog-container" id="blogPost">
-      <button onclick="window.location.href='https://blog-frontend-9cvq.onrender.com/'" id="go-home">
+      <button id="go-home">Go Home</button>
         <span class="fa-solid fa-home"></span> Go to Home
       </button>
       <h1>{{title}}</h1>
@@ -139,5 +139,10 @@
       <p id="date"><small>Published on: {{date}}</small></p>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+      document.getElementById("go-home").addEventListener("click", () => {
+        window.location.href = "https://blog-frontend-9cvq.onrender.com/";
+      });
+    </script>
   </body>
 </html>
