@@ -64,102 +64,102 @@ function body() {
       const data = await response.json();
       console.log(data);
 
-      // for (const blog of data) {
-      //   const container = create("div");
-      //   const wrapper = create("div");
-      //   const header = create("div");
-      //   const icon = create("span");
-      //   const title = create("h2");
-      //   const content = create("div");
-      //   const footer = create("div");
-      //   const date = create("span");
-      //   const words = create("span");
+      for (const blog of data) {
+        const container = create("div");
+        const wrapper = create("div");
+        const header = create("div");
+        const icon = create("span");
+        const title = create("h2");
+        const content = create("div");
+        const footer = create("div");
+        const date = create("span");
+        const words = create("span");
 
-      //   // Assign
-      //   container.setAttribute("data-id", blog._id);
+        // Assign
+        container.setAttribute("data-id", blog._id);
 
-      //   // Append
-      //   container.append(wrapper);
-      //   wrapper.append(header, content, footer);
-      //   header.append(title, icon);
-      //   footer.append(date, words);
-      //   blog_container.append(container);
+        // Append
+        container.append(wrapper);
+        wrapper.append(header, content, footer);
+        header.append(title, icon);
+        footer.append(date, words);
+        blog_container.append(container);
 
-      //   icon.className = "fa-solid fa-book";
-      //   title.textContent = limitLength(blog.title);
-      //   content.textContent = limitLength(blog.subtitle);
-      //   date.textContent = blog.date;
-      //   words.innerHTML = `Words: <span style='color: #B99DBC; margin: 0px 5px'>${
-      //     blog.text.split(" ").length
-      //   }</span>`;
+        icon.className = "fa-solid fa-book";
+        title.textContent = limitLength(blog.title);
+        content.textContent = limitLength(blog.subtitle);
+        date.textContent = blog.date;
+        words.innerHTML = `Words: <span style='color: #B99DBC; margin: 0px 5px'>${
+          blog.text.split(" ").length
+        }</span>`;
 
-      //   wrapper.addEventListener("click", (event) => {
-      //     const blogId = event.currentTarget.parentNode.getAttribute("data-id");
-      //     window.location.href = `https://blog-5edj.onrender.com/blog/${blogId}`; // Redirect to /blog/:id
-      //   });
+        wrapper.addEventListener("click", (event) => {
+          const blogId = event.currentTarget.parentNode.getAttribute("data-id");
+          window.location.href = `https://blog-5edj.onrender.com/blog/${blogId}`; // Redirect to /blog/:id
+        });
 
-      //   setStyle(
-      //     blog_container,
-      //     false,
-      //     `display:flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;`
-      //   );
-      //   setStyle(
-      //     container,
-      //     false,
-      //     `padding: 10px; width: 100%; max-width: 400px`
-      //   );
-      //   setStyle(
-      //     wrapper,
-      //     false,
-      //     `
-      //     display: flex;
-      //     flex-direction: column;
-      //     width: 100%;
-      //     max-width: 400px;
-      //     height: auto;
-      //     box-shadow: 2px 2px 5px #eee;
-      //     border: 2px solid #eee;
-      //   `
-      //   );
-      //   setStyle(
-      //     header,
-      //     false,
-      //     `
-      //     width: 100%;
-      //     min-height: 50px;
-      //     background-color: #DDE2FF;
-      //     display: flex;
-      //     align-items: center;
-      //     padding: 10px;
-      //   `
-      //   );
-      //   setStyle(
-      //     icon,
-      //     false,
-      //     `max-width: 50px; font-size: 1.5rem; color: #112; opacity: 0.8;`
-      //   );
-      //   setStyle(title, false, `flex: 1;`);
-      //   setStyle(content, false, `flex:1; padding: 10px;`);
-      //   setStyle(
-      //     footer,
-      //     false,
-      //     `
-      //     width: 100%;
-      //     min-height: 50px;
-      //     background-color: #fff;
-      //     display: flex;
-      //     align-items: center;
-      //     padding: 10px;
-      //     border-top: 2px solid #DDE2FF;
-      //   `
-      //   );
-      //   setStyle(
-      //     date,
-      //     false,
-      //     `min-width: 100px; border-right: 2px solid #DDE2FF; color: #B99DBC`
-      //   );
-      //   setStyle(words, false, `flex: 1; display: flex; justify-content: end`);
-      // }
+        setStyle(
+          blog_container,
+          false,
+          `display:flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;`
+        );
+        setStyle(
+          container,
+          false,
+          `padding: 10px; width: 100%; max-width: 400px`
+        );
+        setStyle(
+          wrapper,
+          false,
+          `
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 400px;
+          height: auto;
+          box-shadow: 2px 2px 5px #eee;
+          border: 2px solid #eee;
+        `
+        );
+        setStyle(
+          header,
+          false,
+          `
+          width: 100%;
+          min-height: 50px;
+          background-color: #DDE2FF;
+          display: flex;
+          align-items: center;
+          padding: 10px;
+        `
+        );
+        setStyle(
+          icon,
+          false,
+          `max-width: 50px; font-size: 1.5rem; color: #112; opacity: 0.8;`
+        );
+        setStyle(title, false, `flex: 1;`);
+        setStyle(content, false, `flex:1; padding: 10px;`);
+        setStyle(
+          footer,
+          false,
+          `
+          width: 100%;
+          min-height: 50px;
+          background-color: #fff;
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          border-top: 2px solid #DDE2FF;
+        `
+        );
+        setStyle(
+          date,
+          false,
+          `min-width: 100px; border-right: 2px solid #DDE2FF; color: #B99DBC`
+        );
+        setStyle(words, false, `flex: 1; display: flex; justify-content: end`);
+      }
     } catch (error) {
       console.error(error);
     }
