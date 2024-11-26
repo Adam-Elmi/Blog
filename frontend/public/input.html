@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Form</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #dde2ff, #fcddff);
+      }
+      form {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        width: 100%;
+        max-width: 650px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        color: #333;
+        text-align: center;
+      }
+      form h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: #4a47a3;
+        font-weight: bold;
+      }
+      label {
+        font-weight: 600;
+        margin-top: 1rem;
+        display: block;
+        text-align: left;
+        color: #555;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.75rem;
+        margin: 0.5rem 0;
+        border: none;
+        border-radius: 10px;
+        background: #f2f3ff;
+        font-size: 1rem;
+        outline: none;
+        transition: background 0.3s ease, transform 0.2s;
+      }
+      input:focus,
+      textarea:focus {
+        background: #e0e2ff;
+        transform: scale(1.02);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+        line-height: 1.5rem;
+      }
+      button {
+        width: 100%;
+        padding: 0.9rem;
+        border: none;
+        border-radius: 10px;
+        background: #4a47a3;
+        color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 1.5rem;
+        transition: background 0.3s ease, transform 0.2s;
+      }
+      button:hover {
+        background: #3834a1;
+        transform: scale(1.02);
+      }
+      .output-container {
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 650px;
+        background: #fff;
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .output h1,
+      .output h2 {
+        color: #4a47a3;
+      }
+      .output hr {
+        margin: 10px 0 !important;
+      }
+      .output p {
+        margin: 10px 0 !important;
+        line-height: 1.8rem;
+      }
+      .output code {
+        background-color: #fcddff;
+        padding: 5px;
+        line-height: 1.8rem;
+        border-radius: 5px;
+      }
+      .output .highlight {
+        background: #fcddff;
+        border-radius: 5px;
+        padding: 5px;
+      }
+      .output .notice {
+        background: #f0f8ff;
+        border-left: 4px solid #4a47a3;
+        padding: 10px;
+        margin: 10px 0;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      "
+    >
+      <form id="blogForm" action="/publish" method="POST">
+        <h2>Create a Blog Post</h2>
+
+        <label for="title">Post Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Enter post title"
+          required
+        />
+
+        <label for="subtitle">Post Subtitle</label>
+        <input
+          type="text"
+          id="subtitle"
+          name="subtitle"
+          placeholder="Enter post subtitle"
+          required
+        />
+
+        <label for="text">Content</label>
+        <textarea
+          id="text"
+          name="text"
+          placeholder="Write your post here..."
+          required
+        ></textarea>
+
+        <button type="submit">Publish Post</button>
+      </form>
+
+      <div class="output-container">
+        <div class="output" id="output"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+    <script>
+      const titleInput = document.getElementById("title");
+      const subtitleInput = document.getElementById("subtitle");
+      const textArea = document.getElementById("text");
+      const outputDiv = document.getElementById("output");
+
+      const md = window.markdownit({ html: true, linkify: true });
+
+      function updatePreview() {
+        const title = titleInput.value.trim();
+        const subtitle = subtitleInput.value.trim();
+        const markdown = textArea.value;
+
+        let html = "";
+        if (title) html += `<h1>${title}</h1>`;
+        if (subtitle) html += `<h2>${subtitle}</h2>`;
+        html += md.render(processCustomFeatures(markdown));
+
+        outputDiv.innerHTML = html;
+      }
+
+      function processCustomFeatures(text) {
+        text = text.replace(/\/(.*?)\//g, '<span class="highlight">$1</span>'); // Highlight text
+        text = text.replace(
+          /\[note\](.*?)\[\/note\]/g,
+          '<div class="notice">$1</div>'
+        ); // Notice
+        text = text.replace(/currentD/g, getCurrentDate()); // Current Date
+        return text;
+      }
+
+      function getCurrentDate() {
+        const today = new Date();
+        return today.toLocaleDateString("en-GB");
+      }
+
+      // Event listeners for live updates
+      titleInput.addEventListener("input", updatePreview);
+      subtitleInput.addEventListener("input", updatePreview);
+      textArea.addEventListener("input", updatePreview);
+
+      // Initial render
+      updatePreview();
+
+      async function publish(event) {
+        event.preventDefault(); // Prevent the form from refreshing the page
+        try {
+          const response = await fetch("/publish", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              title: titleInput.value,
+              subtitle: subtitleInput.value,
+              text: textArea.value,
+            }),
+          });
+          const data = await response.json();
+          console.log("Published data:", data);
+        } catch (error) {
+          console.error("Failed to publish data:", error);
+        }
+      }
+
+      document.getElementById("blogForm").addEventListener("submit", publish);
+    </script>
+  </body>
+</html>
