@@ -85,7 +85,7 @@ app.get("/blog/:id", async (req, res) => {
       return res.status(404).json({ error: "Blog not found" });
     }
 
-    const htmlTemplate = fs.readFileSync(path.join(dirname, 'frontend', 'public', 'blog.html'), 'utf-8');
+    const htmlTemplate = fs.readFileSync(path.join(dirname, "..", "frontend", "public", 'blog.html'), 'utf-8');
 
     function processCustomFeatures(text) {
       text = text.replace(/\/(.*?)\//g, '<span class="highlight">$1</span>');
