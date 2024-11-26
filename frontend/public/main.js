@@ -1,4 +1,4 @@
-import layout from "./public/components/layout.js";
+import layout from "./components/layout.js";
 
 const root = document.getElementById("root");
 if (root) {
