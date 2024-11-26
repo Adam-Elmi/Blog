@@ -34,11 +34,11 @@ connectToDB();
 
 const fileName = fileURLToPath(import.meta.url);
 const dirname = path.dirname(fileName);
-const inputFile = path.join(dirname, "public", "input.html");
-const blogFile = path.join(dirname, "public", "blog.html");
+const inputFile = path.join(dirname, "frontend", "public", "input.html");
+const blogFile = path.join(dirname, "frontend", "public", "blog.html");
 
 app.use(express.json()); // To parse JSON request bodies
-app.use(express.static("public"));
+app.use(express.static("frontend/public"));
 
 // Initialize markdown-it with the Prism plugin
 const md = new MarkdownIt({ html: true, linkify: true }).use(markdownItPrism);
