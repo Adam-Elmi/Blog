@@ -20,32 +20,15 @@ const client = new MongoClient(uri);
 const db = client.db("My-blog");
 
 async function connectToDB() {
-  return Promise.race([
-    client.connect(),
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Connection timeout")), 10000)
-    ),
-  ]);
-}
-
-async function startServer() {
   try {
-    await connectToDB();
+    await client.connect();
     console.log("Connected to MongoDB");
-    app.listen(port, () => {
-      console.log(`Server is running at http://localhost:${port}`);
-    });
   } catch (error) {
-    console.error("Could not connect to MongoDB", error);
+    console.error(`Failed to connect: ${error}`);
   }
 }
 
-startServer();
-
-app.get("/test", (req, res) => {
-  res.send("Server is working");
-});
-
+connectToDB();
 
 const fileName = fileURLToPath(import.meta.url);
 const dirname = path.dirname(fileName);
