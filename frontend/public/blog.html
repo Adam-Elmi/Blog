@@ -140,8 +140,10 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script>
-      document.getElementById("go-home").addEventListener("click", () => {
+      document.getElementById("go-home").addEventListener("click", async () => {
+        console.log(`Previous location: ${window.location.href}`);
         window.location.href = "https://blog-frontend-9cvq.onrender.com";
+        console.log(`Currnet location: ${window.location.href}`);
       });
     </script>
   </body>
