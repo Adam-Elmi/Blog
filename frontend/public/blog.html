@@ -142,8 +142,9 @@
     <script>
       document.getElementById("go-home").addEventListener("click", async () => {
         console.log(`Previous location: ${window.location.href}`);
-        window.location.href = "https://blog-frontend-9cvq.onrender.com";
-        console.log(`Currnet location: ${window.location.href}`);
+        document.getElementById("go-back").addEventListener("click", () => {
+          window.history.back();
+        });
       });
     </script>
   </body>
