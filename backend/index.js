@@ -13,6 +13,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
+
 const port = process.env.PORT || 3000;
 const uri = process.env.URI;
 const client = new MongoClient(uri);
