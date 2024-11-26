@@ -12,7 +12,6 @@ dotenv.config();
 
 const app = express();
 
-
 app.use(cors());
 const port = process.env.PORT || 3000;
 const uri = process.env.URI;
@@ -40,18 +39,17 @@ async function startServer() {
   }
 }
 
-startServer();
+startServer(); // Only start the server here, no duplicate app.listen
 
 app.get("/test", (req, res) => {
   res.send("Server is working");
 });
 
-
 const fileName = fileURLToPath(import.meta.url);
 const dirname = path.dirname(fileName);
 const inputFile = path.join(dirname, "..", "frontend", "public", "input.html");
 const blogFile = path.join(dirname, "..", "frontend", "public", "blog.html");
-console.log(inputFile, blogFile)
+
 app.use(express.json());
 app.use(express.static(path.join(dirname, "frontend", "public")));
 
@@ -123,9 +121,4 @@ app.get("/blog/:id", async (req, res) => {
     console.error("Error fetching blog:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
-
-
-app.listen(port, () => {
-  console.log("Server is running at http://localhost:3000");
 });
