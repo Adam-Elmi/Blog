@@ -85,17 +85,23 @@ app.get("/blog/:id", async (req, res) => {
       return res.status(404).json({ error: "Blog not found" });
     }
 
-    const htmlTemplate = fs.readFileSync(path.join(dirname, "..", "frontend", "public", "blog.html"), "utf-8");
+    const htmlTemplate = fs.readFileSync(path.join(dirname, "..", "frontend", "public", 'blog.html'), 'utf-8');
+
+    function processCustomFeatures(text) {
+      text = text.replace(/\/(.*?)\//g, '<span class="highlight">$1</span>');
+      text = text.replace(/\[note\](.*?)\[\/note\]/g, '<div class="notice">$1</div>');
+      return text;
+    }
 
     const formattedText = md.render(processCustomFeatures(data.text));
 
-    // Embed the frontend URL directly in the HTML
     const htmlContent = htmlTemplate
-      .replace("{{title}}", data.title)
+      .replaceAll("{{title}}", data.title)
       .replace("{{subtitle}}", data.subtitle)
       .replace("{{text}}", formattedText)
       .replace("{{date}}", data.date)
-      .replace("{{frontendURL}}", "https://blog-frontend-9cvq.onrender.com/"); // Set the frontend URL here
+      .replace("{{frontendURL}}", "https://blog-frontend-9cvq.onrender.com/");
+      
 
     res.send(htmlContent);
   } catch (error) {
@@ -103,7 +109,6 @@ app.get("/blog/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 
 
 app.listen(port, () => {
