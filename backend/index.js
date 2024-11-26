@@ -99,8 +99,7 @@ app.get("/blog/:id", async (req, res) => {
       .replaceAll("{{title}}", data.title)
       .replace("{{subtitle}}", data.subtitle)
       .replace("{{text}}", formattedText)
-      .replace("{{date}}", data.date)
-      .replace("{{frontendURL}}", "https://blog-frontend-9cvq.onrender.com/");
+      .replace("{{date}}", data.date);
       
 
     res.send(htmlContent);
