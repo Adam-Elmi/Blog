@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 const uri = process.env.URI;
 const client = new MongoClient(uri);
 const db = client.db("My-blog");
-
+// MongoDB connection
 async function connectToDB() {
   try {
     await client.connect();
